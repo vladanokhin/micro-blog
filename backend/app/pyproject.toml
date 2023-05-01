@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "microservice/blog"
+version = "0.1.0"
+description = "REST-API for blog"
+authors = ["Vlad Anokhin <69010351+vladanokhin@users.noreply.github.com>"]
+license = "MIT license"
+readme = "README.md"
+packages = [{include = "microservice"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.95.1"
+uvicorn = "^0.22.0"
+sqlalchemy = "^2.0.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: blog_db
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - blog-postgres-data:/var/lib/postgresql/data/pgdata
+
+  workspace:
+    container_name: blog_workspace
+    restart: unless-stopped
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    ports:
+      - "${APP_PORT}:8000"
+    environment:
+      - APP_ENV=${APP_ENV}
+      - LOG_LEVEL=${LOG_LEVEL}
+    volumes:
+      - ./backend/app:/app
+    
+
+volumes:
+  blog-postgres-data:
+
+networks:
+  default:
+    driver: "bridge"
+    name: blog_network
