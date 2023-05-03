@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 
 from app.database import Base
 
+
 class Post(Base):
     title = Column(String(30))
     text = Column(Text)
