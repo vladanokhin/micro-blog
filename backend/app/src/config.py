@@ -19,14 +19,15 @@ class Settings(BaseSettings):
             return v
         return PostgresDsn.build(
             scheme="postgresql",
-            host=values.get("POSTGRES_HOST"),
-            port=values.get("POSTGRES_PORT"),
             user=values.get("POSTGRES_USER"),
             password=values.get("POSTGRES_PASSWORD"),
-            path=values.get('POSTGRES_DB'),
+            host=values.get("POSTGRES_HOST"),
+            port=values.get("POSTGRES_PORT"),
+            path='/' + values.get('POSTGRES_DB'),
         )
     
     class Config:
         env_file = '.env'
+
 
 settings = Settings()
